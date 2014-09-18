@@ -1,9 +1,10 @@
 package sandbox
 
-import java.util.UUID
+import java.util.{Date, UUID}
 
 
 import com.ansvia.graph.ObjectConverter
+import com.tinkerpop.blueprints.Element
 import com.tinkerpop.blueprints.Direction
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory
 import org.diegoram.User
@@ -29,32 +30,35 @@ class OrientDbTest extends Specification{
       db should not beNull
     }
 
-    "create a simple vertex for arjones" in {
-      val unmarshalledArjones = ObjectConverter.toCC[User](arjones).get
+    "create a simple vertex for arjones and convert it" in {
+      val unmarshalledArjones = arjones.toCC[User].get
       unmarshalledArjones.screenName === "Gustavo Arjones"
     }
 
-    "retrieve a recently created vertex" in {
+    "retrieve a recently created vertex from the storage" in {
       val unmashalledArjones = db.getVertex(arjones.getId)
-      ObjectConverter.toCC[User](arjones).get.screenName == "Gustavo Arjones"
+      unmashalledArjones.toCC[User].get.screenName == "Gustavo Arjones"
+
     }
 
     "create a simple relation arjones -> knows -> diegoram" in {
-      val newEdge = arjones --> "knows" --> diegoram
-      newEdge.isInstanceOf[VertexWrapper]
+      val newEdge = arjones --> "knows" --> diegoram <()
+      newEdge.setProperty("since", new Date())
+      newEdge.setProperty("introducedBy", "Lufo")
+      newEdge.isInstanceOf[Element]
     }
 
     "retrieve known people by arjones" in {
       val knownByArjones = arjones.pipe.out("knows").toList
       knownByArjones.printDump("arjones knows", "screenName")
       knownByArjones.size must beEqualTo(1)
-      ObjectConverter.toCC[User](knownByArjones.toList.head).get.screenName === "Diego Ramirez"
+      knownByArjones.toList.head.toCC[User].get.screenName === "Diego Ramirez"
     }
 
     "retrieve known people arjones knows in a vertex list" in {
       val knowList = arjones.getVertices(Direction.OUT, "knows").iterator.toList
       knowList.size must beEqualTo(1)
-      ObjectConverter.toCC[User](knowList.head).get.screenName == "Diego Ramirez"
+      knowList.head.toCC[User].get.screenName == "Diego Ramirez"
     }
   }
 
