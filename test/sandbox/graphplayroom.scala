@@ -4,9 +4,8 @@ import java.util.UUID
 
 
 import com.ansvia.graph.ObjectConverter
-import com.tinkerpop.blueprints.{Direction, Vertex}
+import com.tinkerpop.blueprints.Direction
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory
-import com.tinkerpop.gremlin.java.GremlinPipeline
 import org.diegoram.User
 import org.specs2.mutable.Specification
 import com.ansvia.graph.BlueprintsWrapper._
