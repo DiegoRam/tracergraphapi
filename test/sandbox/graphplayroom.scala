@@ -46,9 +46,10 @@ class OrientDbTest extends Specification{
     }
 
     "retrieve known people by arjones" in {
-      val knownByArjones = arjones.pipe.out("knows")
+      val knownByArjones = arjones.pipe.out("knows").toList
       knownByArjones.printDump("arjones knows", "screenName")
-      knownByArjones.isInstanceOf[GremlinPipeline[Vertex, Vertex]]
+      knownByArjones.size must beEqualTo(1)
+      ObjectConverter.toCC[User](knownByArjones.toList.head).get.screenName === "Diego Ramirez"
     }
 
     "retrieve known people arjones knows in a vertex list" in {
