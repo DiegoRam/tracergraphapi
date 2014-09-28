@@ -13,5 +13,4 @@ It's intended to build a social graph starting from a single profile.
 1. Install SBT at your system
 2. Clone the repo
 3. Start
-
-    $sbt compile run
+        $sbt compile run
