@@ -23,7 +23,6 @@ class OrientDbTest extends Specification{
   val arjones = User(UUID.randomUUID().toString, "Gustavo Arjones").save
   val diegoram = User(UUID.randomUUID().toString, "Diego Ramirez").save
 
-
   "graph database" should {
     sequential
     "create a embedded database" in {

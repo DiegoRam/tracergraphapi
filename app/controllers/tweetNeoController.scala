@@ -1,14 +1,14 @@
 package controllers
 
 
-import org.diegoram.models.Tweet
+import org.diegoram.Tweet
 import javax.ws.rs.{QueryParam, PathParam}
 import com.wordnik.swagger.annotations._
 import play.api.mvc.Action
 import org.diegoram.utils
 
-@Api(value = "/tweets", description = "Operation with tweets")
-object TweetController extends BaseApiController{
+@Api(value = "/neo/tweets", description = "Operation with tweets over Neo4J")
+object TweetNeoController extends BaseApiController{
 
   def getOptions(path: String) = Action {
     implicit request => JsonResponse(new utils.ApiResponse(200, "Ok"))

@@ -3,25 +3,59 @@
 # ~~~~
 
 # Home page
-GET         /                           controllers.Application.index
+GET           /                               controllers.Application.index
+GET           /graph                          controllers.Application.graph
+GET            /flare.json                    controllers.Application.flare
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file               controllers.Assets.at(path="/public", file)
+GET           /assets/*file                   controllers.Assets.at(path="/public", file)
 
 # Swagger - Root Resources Listing
-GET         /api-docs                   controllers.ApiHelpController.getResources
+GET           /api-docs                       controllers.ApiHelpController.getResources
 
 #user
-GET         /api-docs/users             controllers.ApiHelpController.getResource(path = "/users")
-GET         /users/:id/followers        controllers.UserController.getFollowersById(id: Int)
-GET         /users/:id                  controllers.UserController.getById(id: Int)
-POST        /users/:number              controllers.UserController.createUsers(number: Int)
-DELETE      /users                      controllers.UserController.deleteAllUsers
+GET           /api-docs/orient/users                 controllers.ApiHelpController.getResource(path = "/orient/users")
+GET           /orient/users/:id/followers            controllers.UserOrientController.getFollowersById(id: Int)
+GET           /orient/users/:id                      controllers.UserOrientController.getById(id: Int)
+POST          /orient/users/:number                  controllers.UserOrientController.createUsers(number: Int)
+DELETE        /orient/users                          controllers.UserOrientController.deleteAllUsers
 
 
 #tweets
-GET         /api-docs/tweets            controllers.ApiHelpController.getResource(path = "/tweets")
-GET         /tweets/:id/user/:userid    controllers.TweetController.getTweeetsByUserId(id: Int, userid: Int)
-GET         /tweets/:id                 controllers.TweetController.getById(id: Int)
-POST        /users/:number              controllers.TweetController.createTweets(number: Int)
-DELETE      /users                      controllers.TweetController.deleteAllTweets
+GET           /api-docs/orient/tweets                controllers.ApiHelpController.getResource(path = "/orient/tweets")
+GET           /orient/tweets/:id/user/:userid        controllers.TweetOrientController.getTweeetsByUserId(id: Int, userid: Int)
+GET           /orient/tweets/:id                     controllers.TweetOrientController.getById(id: Int)
+POST          /orient/users/:number                  controllers.TweetOrientController.createTweets(number: Int)
+DELETE        /orient/users                          controllers.TweetOrientController.deleteAllTweets
+
+
+#tweets
+GET           /api-docs/neo/tweets                controllers.ApiHelpController.getResource(path = "/neo/tweets")
+GET           /neo/tweets/:id/user/:userid        controllers.TweetNeoController.getTweeetsByUserId(id: Int, userid: Int)
+GET           /neo/tweets/:id                     controllers.TweetNeoController.getById(id: Int)
+POST          /neo/users/:number                  controllers.TweetNeoController.createTweets(number: Int)
+DELETE        /neo/users                          controllers.TweetNeoController.deleteAllTweets
+
+
+#user
+GET           /api-docs/neo/users                 controllers.ApiHelpController.getResource(path = "/neo/users")
+GET           /neo/users/:id/followers            controllers.UserNeoController.getFollowersById(id: Int)
+GET           /neo/users/:id                      controllers.UserNeoController.getById(id: Int)
+POST          /neo/users/:number                  controllers.UserNeoController.createUsers(number: Int)
+DELETE        /neo/users                          controllers.UserNeoController.deleteAllUsers
+
+
+#tweets
+GET           /api-docs/titan/tweets                controllers.ApiHelpController.getResource(path = "/titan/tweets")
+GET           /titan/tweets/:id/user/:userid        controllers.TweetTitanController.getTweeetsByUserId(id: Int, userid: Int)
+GET           /titan/tweets/:id                     controllers.TweetTitanController.getById(id: Int)
+POST          /titan/users/:number                  controllers.TweetTitanController.createTweets(number: Int)
+DELETE        /titan/users                          controllers.TweetTitanController.deleteAllTweets
+
+
+#user
+GET           /api-docs/titan/users               controllers.ApiHelpController.getResource(path = "/titan/users")
+GET           /titan/users/:id/followers            controllers.UserTitanController.getFollowersById(id: Int)
+GET           /titan/users/:id                      controllers.UserTitanController.getById(id: Int)
+POST          /titan/users/:number                  controllers.UserTitanController.createUsers(number: Int)
+DELETE        /titan/users                          controllers.UserTitanController.deleteAllUsers

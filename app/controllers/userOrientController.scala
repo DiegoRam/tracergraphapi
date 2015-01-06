@@ -1,13 +1,13 @@
 package controllers
 
-import org.diegoram.models.User
+import org.diegoram.User
 import javax.ws.rs.{QueryParam, PathParam}
 import com.wordnik.swagger.annotations._
 import play.api.mvc.Action
 import org.diegoram.utils
 
-@Api(value = "/users", description = "Operation with Users")
-object UserController extends BaseApiController{
+@Api(value = "/orient/users", description = "Operation with Users over Orientdb")
+object UserOrientController extends BaseApiController{
 
   def getOptions(path: String) = Action {
     implicit request => JsonResponse(new utils.ApiResponse(200, "Ok"))
