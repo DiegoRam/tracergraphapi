@@ -46,13 +46,13 @@ class NeoPerformanceTest extends Specification{
       }).size should beEqualTo(100)
     }
 
-    /*"create 100K nodes" >> {
+    "create 100K nodes" >> {
       val userList = for(i <- 1 to 100000) yield (
         User(UUID.randomUUID().toString, "Diego_" + i.toString).save
         )
       userList.size should beEqualTo(100000)
 
-    }*/
+    }
 
     "retrieve a single Node by id" >> {
       graph.getVertex(diegoram.getId).toCC[User].get.screenName must contain("Diego")
